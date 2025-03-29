@@ -44,6 +44,79 @@ Issue 5: ACL not blocking HR to Engineering
 - <b>Cisco Packet Tracer</b>
 
 <h2>Program walk-through:</h2>
-Here is an overview of the network. 
+1. Initial Topology Setup:
 
-![Screenshot 2025-03-29 012956](https://github.com/user-attachments/assets/f0c7008e-3e02-4bff-83d4-27e051a968d5)
+Connected routers with serial DCE/DTE cables
+
+Configured PCs to appropriate VLANs via access ports on Switch4
+
+Connected HQ routers to Switch4 using trunk ports 
+
+![Screenshot 2025-03-29 012956](https://github.com/user-attachments/assets/2414c4da-5c0f-4fd1-9fad-cfef569c63dc)
+
+2. VLAN Creation and Trunking:
+
+vlan 10
+vlan 20
+vlan 30
+interface range g0/1 - 2
+switchport mode trunk
+switchport trunk allowed vlan all
+
+![Screenshot 2025-03-22 001353](https://github.com/user-attachments/assets/737de86b-2357-46a9-86d5-821f0c53de69)
+
+
+3. Router Subinterfaces for VLANs (Router7):
+
+interface g0/2.10
+encapsulation dot1q 10
+ip address 192.168.10.3 255.255.255.0
+
+![Screenshot 2025-03-22 021225](https://github.com/user-attachments/assets/2ff09a46-0f59-4772-b9ff-b77c86ff9be6)
+
+4. HSRP Redundancy Setup (Router6 as Active):
+
+interface g0/1.10
+ip address 192.168.10.2 255.255.255.0
+standby 10 ip 192.168.10.1
+standby 10 priority 110
+standby 10 preempt
+
+![Screenshot 2025-03-22 011152](https://github.com/user-attachments/assets/6394ad7d-604d-4e4d-9ee2-24eb35d54298)
+
+5. DHCP Pools for Each VLAN:
+
+ip dhcp pool VLAN10_POOL
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 8.8.8.8
+
+(Repeat for VLAN20 and VLAN30)
+
+![Screenshot 2025-03-23 003640](https://github.com/user-attachments/assets/2d91200f-0318-4061-9e3b-cc13dd837f25)
+
+6. OSPF Configuration (Router7):
+
+router ospf 1
+router-id 7.7.7.7
+network 10.0.0.8 0.0.0.3 area 0
+network 10.0.0.4 0.0.0.3 area 0
+...
+default-information originate
+
+![Screenshot 2025-03-22 235725](https://github.com/user-attachments/assets/88aa7300-aa33-4385-9be0-cea68080e669)
+
+![Screenshot 2025-03-23 001322](https://github.com/user-attachments/assets/d96b396c-87b0-42cc-a086-f34497e7c388)
+
+
+7. ACL for Inter-VLAN Access Control:
+
+ip access-list extended BLOCK_HR_TO_ENG
+deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+permit ip any any
+interface g0/2.20
+ip access-group BLOCK_HR_TO_ENG in
+
+![Screenshot 2025-03-23 002052](https://github.com/user-attachments/assets/3e5c5a47-c380-43a4-9c33-3a5169afb746)
+
+
