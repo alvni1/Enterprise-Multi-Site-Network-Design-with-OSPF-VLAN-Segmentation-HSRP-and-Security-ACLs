@@ -1,7 +1,19 @@
 <h1>Enterprise Multi-Site Network Design with OSPF, VLAN Segmentation, HSRP and Security-ACLs </h1>
 
 <h2>Description</h2>
+This network design incorporates:
 
+Multi-site WAN connectivity using OSPF dynamic routing
+
+VLAN segmentation at the headquarters for traffic separation
+
+HSRP for first-hop redundancy in the LAN environment
+
+DHCP for dynamic IP addressing
+
+NAT for simulated Internet access
+
+ACLs for inter-VLAN and remote access security
 
 <h2>Things Learned/Troubleshooting</h2>
 
