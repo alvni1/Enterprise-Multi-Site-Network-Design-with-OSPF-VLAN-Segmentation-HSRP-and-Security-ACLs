@@ -44,3 +44,5 @@ Issue 5: ACL not blocking HR to Engineering
 - <b>Cisco Packet Tracer</b>
 
 <h2>Program walk-through:</h2>
+Here is an overview of the network. 
+![Screenshot 2025-03-29 012956](https://github.com/user-attachments/assets/f0c7008e-3e02-4bff-83d4-27e051a968d5)
