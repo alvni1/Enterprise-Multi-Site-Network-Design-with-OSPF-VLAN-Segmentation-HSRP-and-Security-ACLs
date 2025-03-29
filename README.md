@@ -1,19 +1,17 @@
 <h1>Enterprise Multi-Site Network Design with OSPF, VLAN Segmentation, HSRP and Security-ACLs </h1>
 
 <h2>Description</h2>
-This network design incorporates:
+This network design incorporates: multi-site WAN connectivity using OSPF dynamic routing, VLAN segmentation at the headquarters for traffic separation, HSRP for first-hop redundancy in the LAN environment, DHCP for dynamic IP addressing, NAT for simulated Internet access, and ACLs for inter-VLAN and remote access security. A multi-site WAN is used when an organization has multiple locations that need to share data and services as though they were on one unified network.
 
-Multi-site WAN connectivity using OSPF dynamic routing
+- <b>OSPF automatically updates the best routes, adapting quickly to network changes with minimal manual configuration. It’s widely used in large networks for its speed, scalability, and reliability. </b>
 
-VLAN segmentation at the headquarters for traffic separation
+- <b>HSRP provides redundancy for the default gateway in a LAN by allowing multiple routers to act as backups for each other. This ensures minimal downtime and continuous network access if the primary gateway fails.</b> 
 
-HSRP for first-hop redundancy in the LAN environment
+- <b>DHCP automatically assigns IP addresses and other settings to devices, eliminating the need for manual configuration. This reduces errors, prevents address conflicts, and simplifies network administration.</b> 
 
-DHCP for dynamic IP addressing
+- <b>ACLs control which traffic is allowed or denied on network devices, helping to prevent unauthorized access and improve overall security.</b> 
 
-NAT for simulated Internet access
-
-ACLs for inter-VLAN and remote access security
+- <b>NAT allows multiple devices on a private network to share a single public IP address, helping conserve IPv4 addresses. It also enhances security by hiding internal IPs, reducing direct exposure of internal hosts to the internet.</b>
 
 <h2>Things Learned/Troubleshooting</h2>
 
